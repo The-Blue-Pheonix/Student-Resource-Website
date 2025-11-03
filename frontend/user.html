@@ -1,163 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Register Animation</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login Register Animation — Supabase Auth</title>
+
+  <!-- Lottie + GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
 
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #001F3F, #0074D9);
-      overflow: hidden;
+      height:100vh; display:flex; justify-content:center; align-items:center;
+      background: linear-gradient(135deg,#001F3F,#0074D9); overflow:hidden;
     }
 
     /* Intro Screen */
-    #introScreen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: black;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    #lottieIntro {
-      width: 200px;
-      height: 200px;
-    }
-
-    .introText {
-      color: #00aaff;
-      font-size: 1.8rem;
-      margin-top: 15px;
-      text-align: center;
-    }
+    #introScreen { position:fixed; inset:0; background:black; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; z-index:1000; }
+    #lottieIntro { width:200px; height:200px; }
+    .introText { color:#00aaff; font-size:1.8rem; margin-top:15px; text-align:center; }
 
     /* Auth Container */
-    #authContainer {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-      width: 400px;
-      max-width: 90%;
-      opacity: 0; /* hidden initially for animation */
-      transform: translateY(50px);
-    }
+    #authContainer { background: rgba(255,255,255,0.1); padding:2rem; border-radius:15px;
+      box-shadow:0 4px 30px rgba(0,0,0,0.5); backdrop-filter:blur(10px); width:400px; max-width:90%;
+      opacity:0; transform:translateY(50px); }
+    .hidden { display:none; }
 
-    .hidden {
-      display: none;
-    }
+    .tabs { display:flex; justify-content:space-around; margin-bottom:1.5rem; }
+    .tabs button { flex:1; padding:0.8rem; background:transparent; border:none; color:white; font-size:1rem;
+      font-weight:bold; cursor:pointer; transition:0.3s; }
+    .tabs button.active { border-bottom:2px solid #00aaff; color:#00aaff; }
 
-    .tabs {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 1.5rem;
-    }
+    .form { display:none; flex-direction:column; }
+    .form.active { display:flex; }
+    .form input { margin:0.7rem 0; padding:0.9rem; border-radius:10px; border:none; outline:none; font-size:1rem; width:100%; }
 
-    .tabs button {
-      flex: 1;
-      padding: 0.8rem;
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    .password-container { position:relative; }
+    .password-container input { width:100%; padding-right:2.5rem; }
+    .eye { position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:1.1rem; }
 
-    .tabs button.active {
-      border-bottom: 2px solid #00aaff;
-      color: #00aaff;
-    }
+    .form button { margin-top:1rem; padding:1rem; background:#00aaff; color:white; border:none; border-radius:10px; cursor:pointer; font-size:1rem; transition:0.3s; }
+    .form button:hover { background:#0088cc; }
 
-    .form {
-      display: none;
-      flex-direction: column;
-    }
+    .msg { margin-top:0.7rem; color:#fff; font-size:0.95rem; min-height:20px; text-align:center; }
 
-    .form.active {
-      display: flex;
-    }
-
-    .form input {
-      margin: 0.7rem 0;
-      padding: 0.9rem;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    /* Password field with eye */
-    .password-container {
-      position: relative;
-    }
-
-    .password-container input {
-      width: 100%;
-      padding-right: 2.5rem;
-    }
-
-    .eye {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #333;
-      font-size: 1.1rem;
-    }
-
-    .form button {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: #00aaff;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s;
-    }
-
-    .form button:hover {
-      background: #0088cc;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      #authContainer {
-        width: 90%;
-        padding: 1.5rem;
-      }
-
-      .introText {
-        font-size: 1.2rem;
-      }
-
-      .form input, .form button {
-        font-size: 0.9rem;
-        padding: 0.8rem;
-      }
+    @media (max-width:600px){
+      #authContainer { width:90%; padding:1.5rem; }
+      .introText { font-size:1.2rem; }
+      .form input, .form button { font-size:0.9rem; padding:0.8rem; }
     }
   </style>
 </head>
@@ -169,36 +61,55 @@
   </div>
 
   <!-- Auth Container -->
-  <div id="authContainer" class="hidden">
+  <div id="authContainer" class="hidden" aria-live="polite">
     <div class="tabs">
       <button id="loginTab" class="active">Login</button>
       <button id="registerTab">Register</button>
     </div>
 
     <!-- Login Form -->
-    <form id="loginForm" class="form active">
-      <input type="email" placeholder="Email" required>
+    <form id="loginForm" class="form active" onsubmit="return handleLogin(event)">
+      <input id="loginEmail" type="email" placeholder="Email" required />
       <div class="password-container">
-        <input type="password" id="loginPassword" placeholder="Password" required>
+        <input id="loginPassword" type="password" placeholder="Password" required />
         <span class="eye" onclick="togglePassword('loginPassword')">👁</span>
       </div>
       <button type="submit">Login</button>
     </form>
 
     <!-- Register Form -->
-    <form id="registerForm" class="form">
-      <input type="text" placeholder="Username" required>
-      <input type="email" placeholder="Email" required>
+    <form id="registerForm" class="form" onsubmit="return handleRegister(event)">
+      <input id="regUsername" type="text" placeholder="Username" required />
+      <input id="regEmail" type="email" placeholder="Email" required />
       <div class="password-container">
-        <input type="password" id="registerPassword" placeholder="Password" required>
+        <input id="registerPassword" type="password" placeholder="Password" required />
         <span class="eye" onclick="togglePassword('registerPassword')">👁</span>
       </div>
       <button type="submit">Register</button>
     </form>
+
+    <div id="message" class="msg"></div>
   </div>
 
-  <script>
-    // Lottie Intro
+  <!-- Supabase + App logic -->
+  <script type="module">
+    // ---------- CONFIG: Replace these ----------
+    const SUPABASE_URL = "https://gcwolxptngeququxgtgl.supabase.co"; // <-- replace
+    const SUPABASE_ANON_KEY = "sb_publishable_v0cEeyPss01CXNn4pjTcNA_8uxD72Lt"; // <-- replace
+    const ADMIN_EMAILS = [
+      "chirabrataghosal9@gmail.com",
+      "admin2@college.edu",
+      "admin3@college.edu",
+      "admin4@college.edu"
+    ]; // <-- put your admin emails here
+    // -------------------------------------------
+
+    // Import supabase client (ESM from jsdelivr)
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Lottie intro
     var animation = lottie.loadAnimation({
       container: document.getElementById('lottieIntro'),
       renderer: 'svg',
@@ -207,40 +118,132 @@
       path: 'https://assets3.lottiefiles.com/packages/lf20_x62chJ.json'
     });
 
-    animation.addEventListener('complete', () => {
+    animation.addEventListener('complete', async () => {
       document.getElementById('introScreen').style.display = 'none';
       const auth = document.getElementById('authContainer');
       auth.classList.remove('hidden');
+      gsap.to(auth, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
 
-      // GSAP transition
-      gsap.to(auth, {opacity: 1, y: 0, duration: 1, ease: "power3.out"});
+      // If already signed in, redirect to appropriate page
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email) {
+        redirectByRole(session.user.email);
+      }
     });
 
-    // Tab Switch
+    // Tabs logic
     const loginTab = document.getElementById('loginTab');
     const registerTab = document.getElementById('registerTab');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
+    const messageDiv = document.getElementById('message');
 
     loginTab.addEventListener('click', () => {
-      loginTab.classList.add('active');
-      registerTab.classList.remove('active');
-      loginForm.classList.add('active');
-      registerForm.classList.remove('active');
+      loginTab.classList.add('active'); registerTab.classList.remove('active');
+      loginForm.classList.add('active'); registerForm.classList.remove('active');
+      clearMessage();
     });
 
     registerTab.addEventListener('click', () => {
-      registerTab.classList.add('active');
-      loginTab.classList.remove('active');
-      registerForm.classList.add('active');
-      loginForm.classList.remove('active');
+      registerTab.classList.add('active'); loginTab.classList.remove('active');
+      registerForm.classList.add('active'); loginForm.classList.remove('active');
+      clearMessage();
     });
 
-    // Password toggle
-    function togglePassword(id) {
+    function togglePassword(id){
       const input = document.getElementById(id);
       input.type = input.type === "password" ? "text" : "password";
     }
+
+    function showMessage(text, isError = false) {
+      messageDiv.textContent = text;
+      messageDiv.style.color = isError ? "#ffb3b3" : "#dfffd6";
+    }
+    function clearMessage(){ messageDiv.textContent = ""; }
+
+    // Redirect helper based on email
+    function redirectByRole(email){
+      // client-side redirect rule (UI-level)
+      if (ADMIN_EMAILS.includes(email)) {
+        // Admin
+        window.location.href = "/admin.html";
+      } else {
+        // Normal user
+        window.location.href = "/user.html";
+      }
+    }
+
+    // Register - create new user
+    async function handleRegister(evt) {
+      evt.preventDefault();
+      clearMessage();
+      const username = document.getElementById('regUsername').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const password = document.getElementById('registerPassword').value;
+
+      // Prevent registering as admin from frontend (safety UX)
+      if (ADMIN_EMAILS.includes(email)) {
+        showMessage("Registration using an admin email is not allowed here. If this is an admin, contact the system administrator.", true);
+        return;
+      }
+
+      showMessage("Creating account...");
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { username } } // store username in user_metadata
+      });
+
+      if (error) {
+        showMessage("Register failed: " + error.message, true);
+        return;
+      }
+
+      // On many Supabase setups, email confirmation may be required. Inform the user:
+      showMessage("Account created. Check your email to confirm (if required). You can now login after confirmation.");
+      // Optionally auto-switch to login tab:
+      loginTab.click();
+    }
+
+    // Login
+    async function handleLogin(evt) {
+      evt.preventDefault();
+      clearMessage();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      showMessage("Signing in...");
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        showMessage("Login failed: " + error.message, true);
+        return;
+      }
+
+      // Signed in. Redirect based on role.
+      showMessage("Signed in — redirecting...");
+      redirectByRole(email);
+    }
+
+    // Listen to auth changes (optional): if sign out or sign in from another tab
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        // signed out — show message or return to login
+        // we won't force redirect here so user stays on login/register
+        return;
+      }
+      // if signed in, redirect
+      const email = session.user.email;
+      redirectByRole(email);
+    });
+
+    // Expose handlers globally for onsubmit attributes
+    window.handleRegister = handleRegister;
+    window.handleLogin = handleLogin;
+    window.togglePassword = togglePassword;
+
   </script>
 </body>
 </html>
