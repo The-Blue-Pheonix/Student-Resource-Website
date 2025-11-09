@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
+<!-- SUPABASE BACKEND -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <body>
 
   <!-- INTRO SCREEN -->
@@ -56,19 +57,19 @@
       <div class="swiper-slide">
         <h3>B.Tech</h3>
         <p>Engineering syllabus, notes & previous papers.</p>
-        <button class="btn-water"><a class="btn-water" href="courses.html">open</a></button>
+        <button class="btn-water"><a class="btn-water" href="courses.html">OPEN</a></button>
       </div>
 
       <div class="swiper-slide">
         <h3>BCA</h3>
         <p>Computer applications syllabus & study material.</p>
-      <button class="btn-water"><a class="btn-water" href="bca.html">open</a></button>
+      <button class="btn-water"><a class="btn-water" href="bca.html">OPEN</a></button>
       </div>
 
       <div class="swiper-slide">
               <h3>B.Tech(TIU)</h3>
               <p>Take Notes and PYQs you want</p>
-            <button class="btn-water"><a class="btn-water" href="B-Tech/btechTIU.html">open</a></button>
+            <button class="btn-water"><a class="btn-water" href="B-Tech/btechTIU.html">OPEN</a></button>
             </div>
 
           
@@ -76,7 +77,7 @@
       <div class="swiper-slide">
         <h3>BBA</h3>
         <p>Business administration resources & guides.</p>
-  <button class="btn-water"><a class="btn-water" href="bba.html">open</a></button>
+  <button class="btn-water"><a class="btn-water" href="bba.html">OPEN</a></button>
       </div>
 
       </div>
@@ -213,6 +214,14 @@
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Supabse integratoin -->
+<script>
+  const SUPABASE_URL = "";
+  const SUPABASE_ANON_KEY = "";
+  const supabase = supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY); 
+  </script>
+
 
 </body>
 </html>
