@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <link rel="stylesheet" href="review.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="feedback-form-container">
+        <div class="feedback-card form-card">
+            <h2>Share Your Feedback</h2>
+            
+            <form id="reviewForm">
+                <p>How would you rate your experience?</p>
+                <div class="star-rating-input">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+                <input type="hidden" name="rating" id="ratingValue" value="0">
+                
+                <label for="feedbackMessage">Your Message:</label>
+                <textarea id="feedbackMessage" name="message" rows="5" placeholder="Write your feedback here..."></textarea>
+                
+                <button type="submit" class="btn-submit">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="student-feedback-container">
+        <h2>What Our Users Say</h2>
+        
+        <div class="carousel-wrapper">
+            <button id="prevBtn" class="carousel-btn prev">&#8249;</button>
+            
+            <div class="carousel-track-container">
+                <div class="carousel-track">
+                    
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://i.imgur.com/8EwY82P.png" alt="Ananya S.">
+                            <div class="author-details">
+                                <strong>Ananya S.</strong>
+                                <span>BCA Student</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span>
+                        </div>
+                        <p class="review-text">"This site is amazing! I found all my previous year papers in one place."</p>
+                    </div>
+
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://i.imgur.com/Jv63s4x.png" alt="Rajesh K.">
+                            <div class="author-details">
+                                <strong>Rajesh K.</strong>
+                                <span>B.Tech Student</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                        </div>
+                        <p class="review-text">"The notes are incredibly helpful. Highly recommend!"</p>
+                    </div>
+
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://i.imgur.com/sC4tmgY.png" alt="Priya (TIU) Student">
+                            <div class="author-details">
+                                <strong>Priya (TIU) Student</strong>
+                                <span>B.Tech (TIU)</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span><span>&#9734;</span>
+                        </div>
+                        <p class="review-text">"Good content, but the app a bit slow on my device."</p>
+                    </div>
+
+                    </div>
+            </div>
+            
+            <button id="nextBtn" class="carousel-btn next">&#8250;</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
