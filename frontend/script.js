@@ -1,7 +1,7 @@
 // --- 0. INITIALIZE SUPABASE ---
 const SUPABASE_URL = "https://gcwolxptngeququxgtgl.supabase.co";
 // 🚨 PASTE YOUR NEW, ROLLED KEY HERE
-const SUPABASE_KEY = "PASTE_YOUR_NEW_ANON_KEY_HERE"; 
+const SUPABASE_KEY = "sb_publishable_v0cEeyPss01CXNn4pjTcNA_8uxD72Lt"; 
 
 // Use the global 'supabase' object from the CDN to create a new, safe client
 // We name it 'supabaseClient' to avoid errors.

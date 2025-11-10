@@ -8,7 +8,7 @@ body {
 
     /* --- New Animation Rules --- */
     /* 1. We create a new, multi-color gradient */
-    background: linear-gradient(-45deg, #66a6ff, #0454ea, #b3e5fc, #66a6ff);
+    background: linear-gradient(-45deg, #66a6ff, #1449ad, #b3e5fc, #66a6ff);
     
     /* 2. We make it 4x bigger than the screen */
     background-size: 400% 400%;
