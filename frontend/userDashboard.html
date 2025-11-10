@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    #logoutButton { margin-top: 1rem; padding: 0.5rem 1rem; background: #e74c3c; 
+                    color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome, User!</h1>
+  <p>You are logged in.</p>
+  
+  <button id="logoutButton">Logout</button>
+
+  <script type="module">
+    // --- Use the same config keys from your login page ---
+    const SUPABASE_URL = "https://ringzvnghdbkksfzgjmi.supabase.co"; 
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbmd6dm5naGRia2tzZnpnam1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3ODk5MTgsImV4cCI6MjA3ODM2NTkxOH0.ExdjZ8XJqKMrXOp2qr3QMctFwHvzvolGqzBM3enUZXY";
+
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // --- Check if user is logged in ---
+    (async function checkSession() {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      // ...
+      if (!session) {
+        // NO user is logged in. Kick them back to the login page.
+        window.location.href = "user.html"; // <-- FIXED
+      } else {
+        // User is logged in. Greet them.
+        document.querySelector('h1').textContent = 'Welcome, ' + (session.user.user_metadata.username || session.user.email);
+      }
+    })();
+
+    // --- Logout Button Logic ---
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      // On logout, send them back to the login page
+      window.location.href = "user.html";
+    });
+  </script>
+
+</body>
+</html>

@@ -94,8 +94,8 @@
   <!-- Supabase + App logic -->
   <script type="module">
     // ---------- CONFIG: Replace these ----------
-    const SUPABASE_URL = "https://gcwolxptngeququxgtgl.supabase.co"; // <-- replace
-    const SUPABASE_ANON_KEY = "sb_publishable_v0cEeyPss01CXNn4pjTcNA_8uxD72Lt"; // <-- replace
+    const SUPABASE_URL = "https://ringzvnghdbkksfzgjmi.supabase.co"; // <-- replace
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbmd6dm5naGRia2tzZnpnam1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3ODk5MTgsImV4cCI6MjA3ODM2NTkxOH0.ExdjZ8XJqKMrXOp2qr3QMctFwHvzvolGqzBM3enUZXY"; // <-- replace
     const ADMIN_EMAILS = [
       "chirabrataghosal9@gmail.com",
       "admin2@college.edu",
@@ -162,16 +162,16 @@
     function clearMessage(){ messageDiv.textContent = ""; }
 
     // Redirect helper based on email
+    // ...
     function redirectByRole(email){
-      // client-side redirect rule (UI-level)
-      if (ADMIN_EMAILS.includes(email)) {
-        // Admin
-        window.location.href = "/admin.html";
-      } else {
-        // Normal user
-        window.location.href = "/user.html";
-      }
+    if (ADMIN_EMAILS.includes(email)) {
+      window.location.href = "admin.html";
+    } else {
+      // Normal user
+      window.location.href = "index.html"; // <-- NOW IT GOES HOME
     }
+  }
+// ...
 
     // Register - create new user
     async function handleRegister(evt) {
