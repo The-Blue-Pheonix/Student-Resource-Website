@@ -3,321 +3,554 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIU</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <title>B-Tech IT Resources</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #3a8dff, #7b2ff7);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(270deg, #e3e2e2, #ffffff, #ffffffe2);
+      background-size: 400% 400%;
+      animation: whiteBG 20s ease infinite;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    @keyframes whiteBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2.5rem;
+      color: #00040d;
+      padding: 12px 25px;
+      border: 4px solid;
+      border-image: linear-gradient(90deg, #2963d6, #44a90e, #00fff7) 1;
+      animation: borderAnim 4s linear infinite;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-    .tab {
-      padding: 10px 20px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .tab:hover, .tab.active {
-      background: white;
-      color: #3a8dff;
+    @keyframes borderAnim {
+      0% { border-image-source: linear-gradient(90deg, #2963d6, #44a90e, #00fff7); }
+      50% { border-image-source: linear-gradient(270deg, #2963d6, #44a90e, #00fff7); }
+      100% { border-image-source: linear-gradient(90deg, #2963d6, #44a90e, #00fff7); }
     }
 
-    /* Section heading */
-    .section-title {
-      font-size: 28px;
-      margin: 20px 0 10px;
-      text-align: left;
-      width: 100%;
-      max-width: 1200px;
-      font-weight: bold;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    h2.section-title {
+      margin: 40px 0 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0c9713;
     }
 
-    /* Cards */
+    .semester-section {
+      margin-bottom: 60px;
+      padding: 20px;
+    }
+
     .card-container {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 25px;
-      width: 100%;
       max-width: 1200px;
-      margin-bottom: 40px;
+      margin: 0 auto;
+      padding: 20px;
     }
+
     .card {
-      background: rgba(255,255,255,0.15);
-      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
       padding: 20px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-      text-align: center;
-      transform: translateY(30px);
-      opacity: 0;
-      transition: 0.4s ease;
-    }
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #fff;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-    .card p {
-      font-size: 14px;
-      color: #e0e0e0;
-      margin-bottom: 15px;
-    }
-    .card button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #fff, #dcd6ff);
-      color: #3a3a3a;
-      font-weight: bold;
+      box-shadow: 0 0 15px #2963d6;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      transition: 0.3s;
+      border: 3px solid;
+      border-image: linear-gradient(45deg, #2963d6, #44a90e, #00fff7) 1;
+      animation: borderAnim 6s linear infinite;
     }
-    .card button:hover {
-      transform: scale(1.1);
-      background: linear-gradient(135deg, #7b2ff7, #3a8dff);
+
+    .card:hover {
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #2963d6;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      opacity: 0.9;
+      margin-bottom: 15px;
+      color: black;
+    }
+
+    .btn {
+      --color: #2963d6;
+      --color2: rgb(10, 25, 30);
+      padding: 0.4em 1.4em;
+      background-color: transparent;
+      border-radius: 6px;
+      border: 2px solid var(--color);
+      transition: .5s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      z-index: 1;
+      font-weight: 600;
+      font-size: 17px;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      text-transform: uppercase;
+      color: var(--color);
+    }
+
+    .btn::after, .btn::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      transform: skew(90deg) translate(-50%, -50%);
+      position: absolute;
+      inset: 50%;
+      left: 25%;
+      z-index: -1;
+      transition: .5s ease-out;
+      background-color: var(--color);
+    }
+
+    .btn::before {
+      top: -50%;
+      left: -25%;
+      transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+    }
+
+    .btn:hover::before {
+      transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+    }
+
+    .btn:hover::after {
+      transform: skew(45deg) translate(-50%, -50%);
+    }
+
+    .btn:hover {
+      color: var(--color2);
+    }
+
+    .btn:active {
+      filter: brightness(.7);
+      transform: scale(.98);
+    }
+
+    img.icon {
+      height: 40px;
+      position: relative;
+      top: 10px;
+      margin-right: 8px;
+    }
+
+    .semester-tabs {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .semester-tab {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .semester-tab:hover {
+      border-color: #2963d6;
+    }
+
+    .semester-tab.active {
+      background: #2963d6;
       color: white;
     }
 
-/* ✅ Mobile View Optimized (≤480px) */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  /* Tabs (Year Selection) */
-  .tabs {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-
-  .tab {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 12px;
-  }
-
-  /* Section Titles */
-  .section-title {
-    font-size: 18px;
-    text-align: center;
-    margin: 20px 0 10px;
-  }
-
-  /* Cards (Notes, YouTube, PYQ) */
-  .card-container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .card {
-    border-radius: 15px;
-    padding: 16px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 500;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-6px) scale(1.03);
-  }
-}
-
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <h1>TIU BTech CSE Resources</h1>
 
-  <h1>B.Tech CSE (TIU)</h1>
-
-  <!-- Year Tabs -->
-  <div class="tabs">
-    <div class="tab active" data-year="1">1st Year</div>
-    <div class="tab" data-year="2">2nd Year</div>
-    <div class="tab" data-year="3">3rd Year (Coming Soon)</div>
-    <div class="tab" data-year="4">4th Year (Coming Soon)</div>
+  <div class="semester-tabs">
+    <div class="semester-tab active" data-target="semester1">Semester 1</div>
+    <div class="semester-tab" data-target="semester2">Semester 2</div>
+    <div class="semester-tab" data-target="semester3">Semester 3</div>
+    <div class="semester-tab" data-target="semester4">Semester 4</div>
+    <div class="semester-tab" data-target="semester5">Semester 5</div>
+    <div class="semester-tab" data-target="semester6">Semester 6</div>
+    <div class="semester-tab" data-target="semester7">Semester 7</div>
+    <div class="semester-tab" data-target="semester8">Semester 8</div>
   </div>
 
-  <!-- Sections -->
-  <div id="sections"></div>
+  <!-- Semester 1 Section -->
+  <section id="semester1" class="semester-section">
+    <h2 class="section-title"><img src="./youtube.png" class="icon"> YouTube Playlists</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Mathematics 1 Playlist</h3>
+        <p>Full semester Mathematics lectures explained step by step</p>
+        <a href="https://drive.google.com/file/d/1Su3S5RmLGWvwe8hWCemzCj1KoxzXQ8wh/view?usp=sharing"><button class="btn" >Open</button></a>
+      </div>
+      <div class="card">
+        <h3>Physics Playlist</h3>
+        <p>Concepts of mechanics, waves, and more covered in depth.</p>
+        <a href="https://drive.google.com/file/d/1MSeVbvrcbN1ACSCo3RyzlXhz39P7WqZY/view?usp=sharing"><button class="btn" >Open</button></a>
+      </div>
+      <div class="card">
+        <h3>Introduction To Computing Playlist</h3>
+        <p>Basic C language ... just Introduction to the huge world.</p>
+        <a href="https://drive.google.com/file/d/1XmUh-wpK3q8eNKEqcRSCZ-leTp1r3LwE/view?usp=sharing"><button class="btn" >Open</button></a>
+      </div>
+      <div class="card">
+        <h3>Linux Playlist</h3>
+        <p>HACKER feelings</p>
+        <a href="https://drive.google.com/file/d/1wzaOxGjtOBZiYcaYnK9t1v9MwWIEv9qe/view?usp=sharing"><button class="btn" >Open</button></a>
+      </div>
+      <div class="card">
+        <h3>Engineering Drawing Playlist</h3>
+        <p>You will be frustrated most, search yt .. but the best source is this channel.</p>
+        <a href="https://youtube.com/playlist?list=PLDN15nk5uLiD3MEUiqsYPnZOHcVu7um6_&si=ReeCH7PJIJTUH1Xi"><button class="btn" >Open</button></a>
+      </div>
+    </div>
+
+    <h2 class="section-title"><img src="./youtube.png" class="icon"> PYQs</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Mathematics 1 PYQS</h3>
+        <a href="https://drive.google.com/file/d/179QLdtUEYUUvQPYJNagkYeaSsfeNMi-E/view?usp=sharing"><button class="btn" >PYQ 24</button></a>
+        <a href="https://drive.google.com/file/d/1q8W9OM8F4tA3w7gjpky7HsnqH48V331v/view?usp=sharing"><button class="btn" >PYQ 25</button></a>
+      </div>
+      <div class="card">
+        <h3>Physics PYQs</h3>
+        <a href="https://drive.google.com/file/d/1VRjaLUnP6Lp_BzWmxtMaURNibI7WZLAa/view?usp=sharing"><button class="btn" >PYQ 24</button></a>
+        <a href="https://drive.google.com/file/d/14XAkcBvJydV06CdleWj8Uw2qK2s7qF8v/view?usp=sharing"><button class="btn" >PYQ 24(s)</button></a>
+        <a href=""><button class="btn" >PYQ 25</button></a>
+      </div>
+      <div class="card">
+        <h3>Introduction To Programming PYQs</h3>
+        <a href="https://drive.google.com/file/d/1NUX9LpBQpyvWl6loEv1xgRxgqgKAn2xK/view?usp=sharing"><button class="btn" >PYQ 24</button></a>
+        <a href="https://drive.google.com/file/d/14XAkcBvJydV06CdleWj8Uw2qK2s7qF8v/view?usp=sharing"><button class="btn" >PYQ 25</button></a>
+      </div>
+     
+    </div>
+
+
+
+
+    <h2 class="section-title"><img src="./assets/sticky-notes.png" class="icon"> PDF Notes</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Math Notes</h3>
+        <p>Comprehensive PDF notes for Mathematics.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Introduction To Programming Notes</h3>
+        <p>Well-structured Electical notes with examples.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Physics Notes</h3>
+        <p>Important formulas and solved problems included</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+
+
+    <h2 class="section-title">📚 Extra Resources</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Reference Books</h3>
+        <p>Access reference book PDFs and links for extra learning.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Syllabus</h3>
+        <p>Download Syllabus for this semester</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Semester 2 Section -->
+  <h2 class="section-title"><img src="./youtube.png" class="icon"> YouTube Playlists</h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>Mathematics II Playlist</h3>
+      <p>Full semester Mathematics lectures explained step by step</p>
+      <a href="https://drive.google.com/file/d/1yXcdt4XE-ksWzdgVoRQGGKuRTigGVglY/view?usp=sharing"><button class="btn" >Open</button></a>
+    </div>
+    <div class="card">
+      <h3>Basic Electical & Electronics Playlist</h3>
+      <p>Electrical and electronics vibes.</p>
+      <a href="https://drive.google.com/file/d/18_rlSzck6XeHrpijkxUal1bJ7-Br6_jv/view?usp=sharing"><button class="btn" >Open</button></a>
+    </div>
+    <div class="card">
+      <h3>Problem Solving With Data Structure Playlist</h3>
+      <p>DSA starter</p>
+      <a href="https://drive.google.com/file/d/1skPvMgTb1ySZFVzbmqbqJr85kcJqH8q4/view?usp=sharing"><button class="btn" >Open</button></a>
+    </div>
+    <div class="card">
+      <h3>Engineering mechanics Playlist</h3>
+      <p>Most faltu Subject of this sem</p>
+      <a href="https://drive.google.com/file/d/1wzaOxGjtOBZiYcaYnK9t1v9MwWIEv9qe/view?usp=sharing"><button class="btn" >Open</button></a>
+    </div>
+   
+  </div>
+
+  <h2 class="section-title"><img src="./youtube.png" class="icon"> PYQS</h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>Mathematics II PYQS</h3>
+      <p>Full semester Mathematics lectures explained step by step</p>
+      <a href="https://drive.google.com/file/d/1HlWQ_eSX4lgWdXGsogxrb-Sc4G0LItKr/view?usp=sharing"><button class="btn" >2024</button></a>
+      <a href=""><button class="btn" >2025</button></a>
+    </div>
+    <div class="card">
+      <h3>Basic Electical & Electronics Playlist</h3>
+      <p>Electrical and electronics vibes.</p>
+      
+      <a href="https://drive.google.com/file/d/18_rlSzck6XeHrpijkxUal1bJ7-Br6_jv/view?usp=sharing"><button class="btn" >2024</button></a>
+      <a href="https://drive.google.com/file/d/1Zbyg0eYx-mY2QZnuvg4gEMZe3DE_1Nfi/view?usp=sharing"><button class="btn" >2025</button></a>
+    </div>
+    <div class="card">
+      <h3>Problem Solving With Data Structure Playlist</h3>
+      <p>DSA starter</p>
+      <a href="https://drive.google.com/file/d/1JpgOb3EW-Jb4TrjiARY0Sda5UugukObn/view?usp=sharing"><button class="btn" >2025</button></a>
+      <a href="https://drive.google.com/file/d/1skPvMgTb1ySZFVzbmqbqJr85kcJqH8q4/view?usp=sharing"><button class="btn" >2025</button></a>
+    </div>
+    <div class="card">
+      <h3>Engineering mechanics Playlist</h3>
+      <p>Most faltu Subject of this sem</p>
+      <a href="https://drive.google.com/file/d/1kZxlm57fUSGlJO2cKWAtpncQsTnlI5Yb/view?usp=sharing"><button class="btn" >2024</button></a>
+      <a href="https://drive.google.com/file/d/1yXcdt4XE-ksWzdgVoRQGGKuRTigGVglY/view?usp=sharing"><button class="btn" >2025</button></a>
+    </div>
+   
+  </div>
+
+    <h2 class="section-title"><img src="./sticky-notes.png" class="icon"> PDF Notes</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Math Notes</h3>
+        <p>Comprehensive PDF notes for Mathematics.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Chemistry Notes</h3>
+        <p>Important reactions and solved problems included.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>C Programming Notes</h3>
+        <p>Well-structured C programming notes with examples.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Engineering Graphics</h3>
+        <p>Drawing techniques and reference sheets.</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">📚 Extra Resources</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Reference Books</h3>
+        <p>Access reference book PDFs and links for extra learning.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Syllabus</h3>
+        <p>Download Syllabus for this semester</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+  </section>
+
+    <!-- Semester 3 Section -->
+  <section id="semester3" class="semester-section hidden">
+    <h2 class="section-title"><img src="/frontend/assets/youtube.png" class="icon"> YouTube Playlists</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Mathematics Playlist</h3>
+        <p>Full differential equation, Graph Theory lectures explained step by step.</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Analog & Digital electronics Playlist</h3>
+        <p>Concepts of logic gates, circuit diagram and more covered in depth.</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Data Structures & Algorithm Playlist</h3>
+        <p>Concept of Linked List, Stacks and more covered in depth</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Computer Organization Playlist</h3>
+        <p>Learn memory Unit, ALU and addressing Models and master it</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Economics Playlist</h3>
+        <p>Learn about Cost Estimation Model, Inflation etc in detail</p>
+        <button class="btn">Open</button>
+      </div>
+    </div>
+
+    <h2 class="section-title"><img src="/frontend/assets/sticky-notes.png" class="icon"> PDF Notes</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Math Notes</h3>
+        <p>Comprehensive PDF notes for Mathematics.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>DSA Notes</h3>
+        <p>Important theory and solved coding problems included.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Digital & Analog Notes</h3>
+        <p>Well-structured notes with circuit diagrams.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Economics Notes</h3>
+        <p>Comprehensive PDF notes for economics.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Computer Organization Notes</h3>
+        <p>Comprehensive PDF notes with detailed theory</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">📚 Extra Resources</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Reference Books</h3>
+        <p>Access reference book PDFs and links for extra learning.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Syllabus</h3>
+        <p>Download Syllabus for this semester</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+  </section>
+
+    <!-- Semester 4 Section -->
+  <section id="semester4" class="semester-section hidden">
+    <h2 class="section-title"><img src="/frontend/assets/youtube.png" class="icon"> YouTube Playlists</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Discrete Math Playlist</h3>
+        <p>Full semester Mathematics lectures explained step by step.</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Computer Architecture Playlist</h3>
+        <p>Concepts of Pipelining, Hierarchical memory technology etc in details</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Formal Language & Automata Playlist</h3>
+        <p>Understand basic properties of formal languages and formal grammars.</p>
+        <button class="btn">Open</button>
+      </div>
+      <div class="card">
+        <h3>Environmental Sciences Playlist</h3>
+        <p>Learn Elements of ecology, Atmospheric Composition in details</p>
+        <button class="btn">Open</button>
+      </div>
+    </div>
+
+    <h2 class="section-title"><img src="/frontend/assets/sticky-notes.png" class="icon"> PDF Notes</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Math Notes</h3>
+        <p>Comprehensive PDF notes for Mathematics.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Computer Architecture Notes</h3>
+        <p>Important formulas and solved problems included.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Environmental Sciences Notes</h3>
+        <p>Well-structured theory and PYQS</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Formal Language Notes</h3>
+        <p>Detailed theory and important questions included</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">📚 Extra Resources</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Reference Books</h3>
+        <p>Access reference book PDFs and links for extra learning.</p>
+        <button class="btn">Download</button>
+      </div>
+      <div class="card">
+        <h3>Syllabus</h3>
+        <p>Download Syllabus for this semester</p>
+        <button class="btn">Download</button>
+      </div>
+    </div>
+  </section>
 
   <script>
-    // Data
-    const data = {
-      1: {
-        youtube: [
-        ...Array.from({ length: 1 }, (_, i) => `Introduction To Proggraming (Sem ${i+1})`),
-        ...Array.from({ length: 2 }, (_, i) => `Maths ${i+1} (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Physics (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Drawing (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Linux (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Mechanics (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-        notes: [
-        ...Array.from({ length: 1 }, (_, i) => `Introduction To Proggraming (Sem ${i+1})`),
-        ...Array.from({ length: 2 }, (_, i) => `Maths ${i+1} (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Physics (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Drawing (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Linux (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Mechanics (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-        pyq:[
-        ...Array.from({ length: 1 }, (_, i) => `Introduction To Proggraming (Sem ${i+1})`),
-        ...Array.from({ length: 2 }, (_, i) => `Maths ${i+1} (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Physics (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Drawing (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Linux (Sem ${i+1})`),
-        ...Array.from({ length: 1 }, (_, i) => `Engineering Mechanics (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-      },
-      2: {
-        youtube:[
-        ...Array.from({ length: 1 }, (_, i) => `Non Linear DSA(Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Discrete Maths ${i+1} (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `OOPS (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Digital Electronics (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `EVS (Sem ${i+3})`),
-        // ...Array.from({ length: 1 }, (_, i) => ` (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-        notes:[
-        ...Array.from({ length: 1 }, (_, i) => `Non Linear DSA(Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Discrete Maths ${i+1} (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `OOPS (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Digital Electronics (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `EVS (Sem ${i+3})`),
-        // ...Array.from({ length: 1 }, (_, i) => ` (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-        pyq:[
-        ...Array.from({ length: 1 }, (_, i) => `Non Linear DSA(Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Discrete Maths ${i+1} (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `OOPS (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `Digital Electronics (Sem ${i+3})`),
-        ...Array.from({ length: 1 }, (_, i) => `EVS (Sem ${i+3})`),
-        // ...Array.from({ length: 1 }, (_, i) => ` (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `DSA (Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Mechnics Workshop(Sem ${i+2})`),
-        // ...Array.from({ length: 1 }, (_, i) => `Electrical and Electronics (Sem ${i+2})`),
-    
-      ],
-      },
-      3: { coming: true },
-      4: { coming: true }
-    };
-
-    const sectionsDiv = document.getElementById("sections");
-
-    // Function to create cards
-    function createCards(items, section) {
-      const container = document.createElement("div");
-      container.className = "card-container";
-
-      items.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h2>${item}</h2>
-          <p>${section} resources for ${item}</p>
-          <button>📘 Open</button>
-        `;
-        container.appendChild(card);
-      });
-
-      return container;
-    }
-
-    // Load sections for selected year
-    function loadSections(year) {
-      sectionsDiv.innerHTML = "";
-      if (data[year].coming) {
-        sectionsDiv.innerHTML = `<h2 class="section-title">Resources Coming Soon...</h2>`;
-        return;
-      }
-
-      // YouTube
-      const ytTitle = document.createElement("h2");
-      ytTitle.className = "section-title";
-      ytTitle.innerText = "🎥 YouTube Playlists";
-      sectionsDiv.appendChild(ytTitle);
-      sectionsDiv.appendChild(createCards(data[year].youtube, "YouTube"));
-
-      // Notes
-      const notesTitle = document.createElement("h2");
-      notesTitle.className = "section-title";
-      notesTitle.innerText = "📘 Notes";
-      sectionsDiv.appendChild(notesTitle);
-      sectionsDiv.appendChild(createCards(data[year].notes, "Notes"));
-
-      // PYQs
-      const pyqTitle = document.createElement("h2");
-      pyqTitle.className = "section-title";
-      pyqTitle.innerText = "📂 Previous Year Questions (PYQ)";
-      sectionsDiv.appendChild(pyqTitle);
-      sectionsDiv.appendChild(createCards(data[year].pyq, "PYQ"));
-
-      // Animate cards
-      gsap.to(".card", {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      });
-    }
-
-    // Initial Load
-    loadSections(1);
-
-    // Tabs click handler
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        loadSections(tab.getAttribute("data-year"));
+    // Tab functionality
+    document.querySelectorAll('.semester-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        document.querySelectorAll('.semester-tab').forEach(t => {
+          t.classList.remove('active');
+        });
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Hide all sections
+        document.querySelectorAll('.semester-section').forEach(section => {
+          section.classList.add('hidden');
+        });
+        
+        // Show the targeted section
+        const targetId = tab.getAttribute('data-target');
+        document.getElementById(targetId).classList.remove('hidden');
       });
     });
   </script>
