@@ -1,13 +1,24 @@
+// --- 0. INITIALIZE SUPABASE ---
+const SUPABASE_URL = "https://gcwolxptngeququxgtgl.supabase.co";
+// 🚨 PASTE YOUR NEW, ROLLED KEY HERE
+const SUPABASE_KEY = "PASTE_YOUR_NEW_ANON_KEY_HERE"; 
+
+// Use the global 'supabase' object from the CDN to create a new, safe client
+// We name it 'supabaseClient' to avoid errors.
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+console.log('Supabase client initialized');
+
+
+// --- Wait for the page to load before running scripts ---
 document.addEventListener("DOMContentLoaded", function() {
 
     // --- 1. STAR RATING INPUT LOGIC ---
-    
+    // ... (This code is correct, no changes needed) ...
     const stars = document.querySelectorAll(".star-rating-input .star");
     const ratingValueInput = document.getElementById("ratingValue");
     let currentRating = 0;
 
     stars.forEach(star => {
-        // --- Hover effect ---
         star.addEventListener("mouseover", () => {
             resetStars();
             const value = parseInt(star.getAttribute("data-value"));
@@ -18,13 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         star.addEventListener("mouseout", () => {
             resetStars();
-            // Re-fill stars up to the current clicked rating
             for (let i = 0; i < currentRating; i++) {
                 stars[i].classList.add("filled");
             }
         });
 
-        // --- Click effect ---
         star.addEventListener("click", () => {
             currentRating = parseInt(star.getAttribute("data-value"));
             ratingValueInput.value = currentRating;
@@ -41,70 +50,74 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- 2. FORM SUBMISSION (Mock) ---
-    // This part just logs the data. You would replace this
-    // with a 'fetch' call to your backend database.
+    // --- 2. FORM SUBMISSION (Now with Supabase) ---
     const reviewForm = document.getElementById("reviewForm");
-    reviewForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Prevents the page from reloading
-        
+    reviewForm.addEventListener("submit", async (e) => {
+        e.preventDefault(); 
+
         const rating = ratingValueInput.value;
         const message = document.getElementById("feedbackMessage").value;
+        const submitBtn = e.target.querySelector('button[type="submit"]');
 
         if (rating === "0") {
             alert("Please select a star rating.");
             return;
         }
 
-        console.log("--- Feedback Submitted ---");
-        console.log("Rating:", rating);
-        console.log("Message:", message);
-        
-        alert("Thank you for your feedback!");
-        
-        // Clear the form
-        reviewForm.reset();
-        currentRating = 0;
-        ratingValueInput.value = 0;
-        resetStars();
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+
+        // --- SUPABASE INSERT ---
+        // We now use 'supabaseClient'
+        const { data, error } = await supabaseClient
+            .from('review') 
+            .insert([
+                { rate: rating, text: message } 
+            ]);
+
+        if (error) {
+            console.error('Error submitting feedback:', error.message);
+            alert('Sorry, there was an error. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Feedback";
+        } else {
+            console.log('Feedback submitted:', data);
+            alert('Thank you for your feedback!');
+            
+            reviewForm.reset();
+            currentRating = 0;
+            ratingValueInput.value = 0;
+            resetStars();
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Feedback";
+        }
     });
 
 
     // --- 3. CAROUSEL LOGIC ---
-
+    // ... (This code is correct, no changes needed) ...
     const track = document.querySelector(".carousel-track");
     const cards = Array.from(track.children);
     const nextBtn = document.getElementById("nextBtn");
     const prevBtn = document.getElementById("prevBtn");
 
     if (cards.length > 0) {
-        // Get the width of one card (including its margin)
-        const cardWidth = cards[0].getBoundingClientRect().width + 20; // 20px for margin (10px left + 10px right)
-        
+        const cardWidth = cards[0].getBoundingClientRect().width + 20; 
         let currentIndex = 0;
 
-        // Function to move the slide
         function moveToSlide(index) {
-            // Check for boundaries
-            if (index < 0) {
-                index = 0;
-            }
-            if (index > cards.length - 1) {
-                // This logic is for a non-infinite loop.
-                // You can adjust if you want it to wrap around.
-                index = cards.length - 1; 
-            }
+            if (index < 0) index = 0;
+            if (index > cards.length - 1) index = cards.length - 1; 
 
             track.style.transform = `translateX(-${cardWidth * index}px)`;
             currentIndex = index;
             updateArrowVisibility();
         }
 
-        // Hide/show arrows at the beginning/end
         function updateArrowVisibility() {
             prevBtn.style.display = (currentIndex === 0) ? 'none' : 'block';
             
-            // To check if we are at the end, we need to know how many cards fit on screen
             const trackContainerWidth = track.parentElement.getBoundingClientRect().width;
             const visibleCards = Math.floor(trackContainerWidth / cardWidth);
             
@@ -115,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        // --- Event Listeners ---
         nextBtn.addEventListener("click", () => {
             moveToSlide(currentIndex + 1);
         });
@@ -124,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
             moveToSlide(currentIndex - 1);
         });
 
-        // Initialize
         updateArrowVisibility();
     }
 });
