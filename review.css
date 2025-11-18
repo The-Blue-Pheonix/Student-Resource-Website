@@ -6,35 +6,26 @@ body {
     color: #333;
     min-height: 100vh;
 
-    /* --- New Animation Rules --- */
-    /* 1. We create a new, multi-color gradient */
+    /* --- Background Animation --- */
     background: linear-gradient(-45deg, #66a6ff, #0454ea, #b3e5fc, #66a6ff);
-    
-    /* 2. We make it 4x bigger than the screen */
     background-size: 400% 400%;
-    
-    /* 3. We apply the animation */
     animation: gradientAnimation 20s ease infinite;
 }
 
 h2 {
     text-align: center;
-    color: #00234d; /* Dark blue text for titles */
+    color: #00234d;
     font-weight: 600;
     margin-bottom: 30px;
 }
 
-/* --- Feedback Card Base Style --- */
 /* --- Feedback Card Base Style (Frosted Glass) --- */
 .feedback-card {
-    /* Frosted glass effect */
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px); /* For Safari */
-    
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
-    
+    border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     padding: 24px 30px;
     box-sizing: border-box;
@@ -64,22 +55,32 @@ h2 {
     margin-bottom: 8px;
 }
 
-/* Interactive Star Rating (Input) */
+/* --- INTERACTIVE FIRE/EMOJI RATING (Input) --- */
 .star-rating-input {
     margin-bottom: 20px;
 }
+
 .star-rating-input .star {
-    font-size: 2.5em;
-    color: #ccc; /* Default empty star color */
+    font-size: 3em; /* Slightly larger for Emojis */
     cursor: pointer;
-    transition: color 0.2s;
+    
+    /* Default State: "Ash" (Gray and Faded) */
+    filter: grayscale(100%) contrast(0.5);
+    opacity: 0.4;
+    
+    transition: transform 0.2s, filter 0.2s, opacity 0.2s;
+    display: inline-block; /* Needed for transform */
+    padding: 0 5px; /* Spacing between fires */
 }
 
-/* Filled star styles (controlled by JS) */
+/* Active State: "Fire" (Colorful) - Triggered by Hover or JS .filled class */
 .star-rating-input .star:hover,
 .star-rating-input .star.hover,
 .star-rating-input .star.filled {
-    color: #ffc107; /* Yellow filled star */
+    filter: grayscale(0%); /* Restore original emoji color */
+    opacity: 1;
+    transform: scale(1.3); /* Pop effect */
+    text-shadow: 0 0 15px rgba(255, 165, 0, 0.5); /* Optional Glow */
 }
 
 textarea {
@@ -94,7 +95,7 @@ textarea {
 }
 
 .btn-submit {
-    background-color: #2979ff; /* Blue from your image */
+    background-color: #2979ff;
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 1em;
@@ -122,43 +123,32 @@ textarea {
     position: relative;
 }
 
-/* --- MODIFIED RULES FOR GRID --- */
-
 .carousel-track-container {
-    /* No longer needs to hide overflow */
     width: 100%;
 }
 
 .carousel-track {
-    /* This creates the responsive grid */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-
-    /* Override carousel-specific styles from JS */
     transition: none;
     transform: none !important; 
 }
 
 .display-card {
-    /* Remove fixed carousel widths */
     min-width: 0;
     max-width: 100%;
-    margin: 0; /* 'gap' handles the spacing */
+    margin: 0;
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* Hide the carousel buttons */
 .carousel-btn {
     display: none;
 }
 
-/* --- END OF MODIFIED RULES --- */
-
-
-/* Card Content (Display) */
+/* --- Card Content (Display) --- */
 .author-info {
     display: flex;
     align-items: center;
@@ -184,13 +174,23 @@ textarea {
     color: #555;
 }
 
+/* --- DISPLAY FIRE RATING (Read Only) --- */
 .star-rating-display {
-    font-size: 1.2em;
-    color: #ffc107;
+    font-size: 1.4em;
     margin-bottom: 12px;
+    letter-spacing: 2px;
 }
-.star-rating-display span:last-child {
-    color: #ccc; /* Example of a 4-star rating */
+
+/* Normal State for Display (Colorful Fire) */
+.star-rating-display span {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Optional: If you want to show "Empty" fires in reviews, add class="empty" in HTML */
+.star-rating-display span.empty {
+    filter: grayscale(100%);
+    opacity: 0.3;
 }
 
 .review-text {
@@ -199,86 +199,35 @@ textarea {
     line-height: 1.6;
     font-style: italic;
     margin: 0;
-    /* Pushes content above it to the top */
     flex-grow: 1; 
 }
+
 /* --- Animation Keyframes --- */
-/* This tells the animation what to do */
 @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
+
 /* --- Responsive Media Queries --- */
-/* Add this to the very bottom of your style.css */
-
-/* --- For Tablets (Screens < 768px) --- */
 @media (max-width: 768px) {
-    body {
-        padding: 30px 15px;
-    }
-
-    h2 {
-        font-size: 1.8em;
-    }
-
-    /* Move carousel buttons inside the container */
-    .carousel-btn {
-        z-index: 10;
-    }
-    .carousel-btn.prev {
-        left: 10px;
-    }
-    .carousel-btn.next {
-        right: 10px;
-    }
+    body { padding: 30px 15px; }
+    h2 { font-size: 1.8em; }
+    .carousel-btn { z-index: 10; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
 }
 
-
-/* --- For Mobile Phones (Screens < 480px) --- */
 @media (max-width: 480px) {
-    body {
-        padding: 20px 10px;
-    }
-
-    h2 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-    }
-
-    .feedback-card {
-        padding: 20px;
-    }
-
-    /* Make star rating smaller on the form */
-    .star-rating-input .star {
-        font-size: 2em;
-    }
-
-    /* --- Mobile Carousel Adjustments --- */
+    body { padding: 20px 10px; }
+    h2 { font-size: 1.5em; margin-bottom: 20px; }
+    .feedback-card { padding: 20px; }
     
-    /* Make the feedback card smaller */
-    .display-card {
-        min-width: 300px;
-        max-width: 300px;
-    }
-    
-    /* Make buttons smaller and ensure they are inside */
-    .carousel-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 20px;
-    }
-    .carousel-btn.prev {
-        left: 5px;
-    }
-    .carousel-btn.next {
-        right: 10px;
-    }
+    /* Make fire rating slightly smaller on mobile if needed */
+    .star-rating-input .star { font-size: 2.2em; }
+
+    .display-card { min-width: 300px; max-width: 300px; }
+    .carousel-btn { width: 38px; height: 38px; font-size: 20px; }
+    .carousel-btn.prev { left: 5px; }
+    .carousel-btn.next { right: 10px; }
 }
