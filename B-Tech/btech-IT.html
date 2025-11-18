@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-Tech CSE Resources</title>
+  <title>B-Tech IT Resources</title>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <style>
     body {
       margin: 0;
@@ -189,9 +190,32 @@
     .hidden {
       display: none;
     }
+
+    /* Subtle study-themed Lottie in header (non-intrusive) */
+    .study-lottie {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    /* Keep main content above the lottie */
+    h1, .semester-tabs, .semester-section { position: relative; z-index: 1; }
   </style>
 </head>
 <body>
+  <div class="study-lottie" aria-hidden="true">
+    <lottie-player
+      src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json"
+      background="transparent"
+      speed="0.6"
+      loop
+      autoplay>
+    </lottie-player>
+  </div>
   <h1>B-Tech IT Resources</h1>
 
   <div class="semester-tabs">
