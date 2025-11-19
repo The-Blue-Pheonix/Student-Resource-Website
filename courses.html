@@ -1,134 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Cards Animation</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    /* Page background gradient */
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 40px;
-      background: linear-gradient(135deg, #667eea, #764ba2, #f7971e);
-      background-size: 300% 300%;
-      animation: gradientShift 10s ease infinite;
-    }
-    /* anchor tag */
-    a{
-      text-decoration: none;
-      color: inherit;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Card design */
-    .card {
-      width: 220px;
-      height: 160px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 15px;
-      font-size: 22px;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(100px);
-      cursor: pointer;
-      border: 3px solid transparent;
-      background-clip: padding-box;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Border gradient glow */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      padding: 3px;
-      border-radius: 18px;
-      background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-    }
-
-    /* Card content */
-    .card i {
-      font-size: 40px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      font-weight: normal;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="review.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
 
-  <a href="B-Tech/btechCSE.html" class="card-link"><div class="card"><i class="fas fa-laptop-code"></i>CSE<div class="subtitle">Computer Science</div></div></a>
-  <a href="B-Tech/btech-IT.html" class="card-link"><div class="card"><i class="fas fa-database"></i>IT<div class="subtitle">Information Technology</div></div></a>
-  <a href="B-Tech/btechAIML.html" class="card-link"><div class="card"><i class="fas fa-robot"></i>AIML<div class="subtitle">AI & Machine Learning</div></div></a>
-  <a href="B-Tech/btechCSBS.html" class="card-link"><div class="card"><i class="fas fa-project-diagram"></i>CSBS <div class="subtitle">Business Systems</div></div></a>
-  <a href="B-Tech/btechCSDS.html" class="card-link"><div class="card"><i class="fas fa-code-branch"></i>CSDS <div class="subtitle">Data Science</div></div></a>
-  <a href="B-Tech/btechCSCS.html" class="card-link"><div class="card"><i class="fas fa-network-wired"></i>CSCS <div class="subtitle">Cyber Security</div></div></a>
-  <a href="B-Tech/btechIOT.html" class="card-link"><div class="card"><i class="fas fa-cogs"></i>IOT<div class="subtitle">Internet Of Thing</div></div></a>
-  <a href="B-Tech/btechME.html" class="card-link"><div class="card"><i class="fas fa-tools"></i>ME<div class="subtitle">Mechanical Engineering</div></div></a>
-  <a href="B-Tech/btechFT.html" class="card-link"><div class="card"><i class="fas fa-microchip"></i>FT<div class="subtitle">Food Technology</div></div></a>
-  <a href="B-Tech/btechEE.html" class="card-link"><div class="card"><i class="fas fa-bolt"></i>EE<div class="subtitle">Electrical Engineering</div></div></a>
-  <a href="B-Tech/btechCE.html" class="card-link"><div class="card"><i class="fas fa-hard-hat"></i>CE<div class="subtitle">Civil Engineering</div></div></a>
-  <a href="B-Tech/btechME.html" class="card-link"><div class="card"><i class="fas fa-tools"></i>ME<div class="subtitle">Mechanical Engineering</div></div></a>
+    <div class="lottie-overlay" aria-hidden="true">
+        <lottie-player
+            src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay>
+        </lottie-player>
+    </div>
 
+    <section class="feedback-form-container">
+        <div class="feedback-card form-card">
+            <h2>Share Your Feedback</h2>
+            
+            <form id="reviewForm">
+                <p>How would you rate your experience?</p>
+                <div class="star-rating-input">
+                    <span class="star" data-value="1">👍</span>
+                    <span class="star" data-value="2">⭐</span>
+                    <span class="star" data-value="3">❤</span>
+                    <span class="star" data-value="4">🤩</span>
+                    <span class="star" data-value="5">🔥</span>
+                </div>
+                <input type="hidden" name="rating" id="ratingValue" value="0">
+                
+                <label for="feedbackMessage">Your Message:</label>
+                <textarea id="feedbackMessage" name="message" rows="5" placeholder="Write your feedback here..."></textarea>
+                
+                <button type="submit" class="btn-submit">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
 
+    <section class="student-feedback-container">
+        <h2>What Our Tech Team Say</h2>
+        
+        <div class="carousel-wrapper">
+            <button id="prevBtn" class="carousel-btn prev">&#8249;</button>
+            
+            <div class="carousel-track-container">
+                <div class="carousel-track">
+                    
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFHmZ807UoVbw/profile-displayphoto-scale_400_400/B4EZjVzUYSHoAo-/0/1755933661612?e=1764201600&v=beta&t=fY3OmgmnkMU9yKmCF8A1XGexKVUVS63fZU5tMTaDjJ8" alt="Ananya S.">
+                            <div class="author-details">
+                                <strong>Chirabrata Ghosal</strong>
+                                <span>BTech  IT Student</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span class="empty">⭐</span>
+                        </div>
+                        <p class="review-text">"We have build this cool website to help all girls... (and boys). Enjoy !"</p>
+                    </div>
 
-  <script>
-    // Intro animation
-    gsap.to(".card", {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.3,
-      ease: "bounce.out"
-    });
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQFiVeZNs5Izqw/profile-displayphoto-scale_100_100/B4DZlHTA17JMAc-/0/1757837794802?e=1764201600&v=beta&t=cgSuNXnDpXf5v5AGk02pgEYHSEaqBi5R2-cuZCAWwv4" alt="Rajesh K.">
+                            <div class="author-details">
+                                <strong>Anirban Sarkar</strong>
+                                <span>B.Tech TIU Student</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                        </div>
+                        <p class="review-text">"It's easy to use I think , Now new student will not hamper more"</p>
+                    </div>
 
-    // Card color animation effect
-    document.querySelectorAll(".card").forEach((card, i) => {
-      gsap.to(card, {
-        backgroundColor: ["#ffffff", "#ffeaa7", "#a29bfe", "#fab1a0", "#55efc4"],
-        repeat: -1,
-        yoyo: true,
-        duration: 4,
-        delay: i * 0.5
-      });
-    
+                     <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQFXHcbapCCRPA/profile-displayphoto-shrink_400_400/B56Zc010_dHEAg-/0/1748938216849?e=1764201600&v=beta&t=cydRHPnr9S16htJkrV-sI3uATfR_9R9X4IC4PdzKLQ0" alt="Priya (TIU) Student">
+                            <div class="author-details">
+                                <strong>Arpan Atha</strong>
+                                <span>B.Tech IOT</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span class="empty">⭐</span><span class="empty">⭐</span>
+                        </div>
+                        <p class="review-text">"Never Give Up , Our website will help you..."</p>
+                    </div>
 
-      // Hover effect
-      card.addEventListener("mouseenter", () => {
-        gsap.to(card, { scale: 1.1, duration: 0.3 });
-      });
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, { scale: 1, duration: 0.3 });
-      });
-    });
-  </script>
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://media.licdn.com/dms/image/v2/D4E03AQELVlSrEw-iBA/profile-displayphoto-scale_100_100/B4EZh7qsBgHoAc-/0/1754421446379?e=1764201600&v=beta&t=9unDVbAYeg6TRVmFIcItU52wXZkl5V71iS4BZ2OAKOE" alt="Priya (TIU) Student">
+                            <div class="author-details">
+                                <strong>Arnab Sarkar</strong>
+                                <span>B.Tech IOT</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span class="empty">⭐</span><span class="empty">⭐</span>
+                        </div>
+                        <p class="review-text">"We are thrilled to launch it"</p>
+                    </div>
+
+                    <div class="feedback-card display-card">
+                        <div class="author-info">
+                            <img src="https://media.licdn.com/dms/image/v2/D4E03AQEBRW0VPT6EjA/profile-displayphoto-scale_400_400/B4EZjf.axPIMAg-/0/1756104342093?e=1764201600&v=beta&t=tpuHHz52XrnbzZqdkKvEaJp2D-sft3a4vGfPmuSQWIg" alt="Priya (TIU) Student">
+                            <div class="author-details">
+                                <strong>Aryan Mishra</strong>
+                                <span>B.Tech IOT</span>
+                            </div>
+                        </div>
+                        <div class="star-rating-display">
+                            <span></span><span>⭐</span><span>⭐</span><span class="empty">⭐</span><span class="empty">⭐</span>
+                        </div>
+                        <p class="review-text">"Good content, Excited to see users responds..."</p>
+                    </div>
+
+                </div>
+            </div>
+            
+            <button id="nextBtn" class="carousel-btn next">&#8250;</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
