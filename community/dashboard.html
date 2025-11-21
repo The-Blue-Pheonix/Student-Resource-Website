@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body data-page="dashboard">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Create Profile</a>
+        <a href="matches.html">Matches</a>
+        <a href="chat.html">Chat</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main class="container">
+      <h1>Mini Dashboard</h1>
+      <div class="grid three stats">
+        <div class="card rounded-16 shadow-sm stat">
+          <div class="stat-number" id="statConnections">0</div>
+          <div class="stat-label">Connections made</div>
+        </div>
+        <div class="card rounded-16 shadow-sm stat">
+          <div class="stat-number" id="statSkills">0</div>
+          <div class="stat-label">Skills gained</div>
+        </div>
+        <div class="card rounded-16 shadow-sm stat">
+          <div class="stat-number" id="statSessions">0</div>
+          <div class="stat-label">Study sessions completed</div>
+        </div>
+      </div>
+
+      <section class="card rounded-20 shadow-md">
+        <h2>Recommended skills to add</h2>
+        <div id="recommendedSkills" class="chips"></div>
+      </section>
+
+      <section class="card rounded-20 shadow-md">
+        <h2>Learning Goals</h2>
+        <div id="goalsList" class="goals"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>

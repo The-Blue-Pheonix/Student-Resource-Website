@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Component Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="component-library" data-page="components">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Create Profile</a>
+        <a href="matches.html">Matches</a>
+        <a href="chat.html">Chat</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main class="container">
+      <h1>Component Library</h1>
+      <section class="grid two">
+        <div class="card rounded-20 shadow-md">
+          <h2>Buttons</h2>
+          <div class="stack">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+          </div>
+        </div>
+        <div class="card rounded-20 shadow-md">
+          <h2>Chips</h2>
+          <div class="chips">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip selected">JavaScript</span>
+          </div>
+        </div>
+        <div class="card rounded-20 shadow-md">
+          <h2>Cards</h2>
+          <div class="card inner rounded-16 shadow-sm">
+            <div class="avatar small">AB</div>
+            <div>
+              <strong>Ada Byron</strong>
+              <p class="muted">Computer Science, 2nd year</p>
+            </div>
+          </div>
+        </div>
+        <div class="card rounded-20 shadow-md">
+          <h2>Inputs</h2>
+          <input class="input" placeholder="Type here" />
+          <select class="select"><option>Option</option></select>
+        </div>
+        <div class="card rounded-20 shadow-md">
+          <h2>Match score badge</h2>
+          <span class="badge">82% Match</span>
+        </div>
+        <div class="card rounded-20 shadow-md">
+          <h2>Chat bubble</h2>
+          <div class="chat-bubble them">Hey! Want to study HTML?</div>
+          <div class="chat-bubble me">Sure, let’s build a portfolio!</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>

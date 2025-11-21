@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Your Best Matches</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body data-page="matches">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Create Profile</a>
+        <a href="matches.html" class="active">Matches</a>
+        <a href="chat.html">Chat</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main class="container">
+      <h1>Your Best Matches</h1>
+
+      <div class="filters card rounded-16 shadow-sm">
+        <input id="searchInput" class="input" type="text" placeholder="Search by name or skill" />
+        <select id="levelFilter" class="select">
+          <option value="">All Levels</option>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Mentor</option>
+        </select>
+        <input id="interestFilter" class="input" type="text" placeholder="Filter by interest" />
+      </div>
+
+      <div id="matchesGrid" class="grid two">
+        <!-- Cards injected by JS -->
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>
