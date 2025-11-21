@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "student match",
+			"path": "."
+		},
+		{
+			"name": "Student-Resource-Website",
+			"path": "../student resource website project/Student-Resource-Website"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Student-Resource-Website",
+		"liveServer.settings.port": 5501
+	}
+}

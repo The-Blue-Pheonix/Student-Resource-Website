@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Chat & Collaboration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body data-page="chat">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Create Profile</a>
+        <a href="matches.html">Matches</a>
+        <a href="chat.html" class="active">Chat</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main class="chat-layout">
+      <aside class="sidebar rounded-20 shadow-md">
+        <h2>Matches</h2>
+        <ul id="userList" class="user-list">
+          <!-- Filled by JS -->
+        </ul>
+      </aside>
+
+      <section class="chat-area card rounded-20 shadow-md">
+        <div id="chatHeader" class="chat-header">
+          <div class="avatar small" id="chatAvatar">ES</div>
+          <div>
+            <h3 id="chatName">Select a match to chat</h3>
+            <p id="chatMeta" class="muted">Mentorship & peer learning</p>
+          </div>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+          <!-- Messages -->
+        </div>
+        <div class="chat-input">
+          <button title="Upload" class="icon-btn" id="fileBtn">📎</button>
+          <button title="Share notes" class="icon-btn" id="shareBtn">📝</button>
+          <input id="messageInput" class="input flex-1" type="text" placeholder="Type a message" />
+          <button id="sendBtn" class="btn btn-primary">Send</button>
+        </div>
+      </section>
+
+      <aside class="suggestions rounded-20 shadow-md">
+        <h2>AI Suggestion</h2>
+        <p id="aiSuggestion">Both of you know HTML — try building a portfolio together.</p>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>

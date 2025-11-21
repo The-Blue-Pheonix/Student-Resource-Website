@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Find Your Perfect Study Partner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body data-page="landing">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="profile.html">Create Profile</a>
+        <a href="matches.html">Matches</a>
+        <a href="chat.html">Chat</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main>
+      <section class="hero gradient-1 rounded-20 shadow-md">
+        <div class="hero-content">
+          <h1 class="hero-title">Find Your Perfect Study Partner</h1>
+          <p class="hero-tagline">Learn together, grow faster.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="profile.html">Create Profile</a>
+            <a class="btn btn-secondary" href="matches.html">Explore Matches</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <!-- Playful student collaboration illustration (inline SVG) -->
+          <svg viewBox="0 0 320 200" class="hero-svg">
+            <defs>
+              <linearGradient id="gradA" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#A7D8F9" />
+                <stop offset="100%" stop-color="#C6B6EE" />
+              </linearGradient>
+            </defs>
+            <rect x="10" y="20" width="300" height="160" rx="20" fill="url(#gradA)" opacity="0.25" />
+            <circle cx="100" cy="110" r="34" fill="#9EEBCF" />
+            <circle cx="210" cy="90" r="34" fill="#A7D8F9" />
+            <rect x="75" y="135" width="160" height="18" rx="9" fill="#E7ECF4" />
+            <path d="M95 105 q10 -15 25 0" stroke="#6C8BEA" stroke-width="4" fill="none" stroke-linecap="round" />
+            <path d="M205 85 q-10 15 -25 0" stroke="#6C8BEA" stroke-width="4" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="highlights container">
+        <h2 class="section-title">Why EduSync?</h2>
+        <div class="grid three">
+          <div class="card hover-lift rounded-16 shadow-sm">
+            <div class="card-icon" aria-hidden="true">🤖</div>
+            <h3>AI-powered match suggestions</h3>
+            <p>Smart recommendations based on skills you know and want.</p>
+          </div>
+          <div class="card hover-lift rounded-16 shadow-sm">
+            <div class="card-icon" aria-hidden="true">🎓</div>
+            <h3>Skill-based mentorship</h3>
+            <p>Find mentors or be one. Grow your strengths.</p>
+          </div>
+          <div class="card hover-lift rounded-16 shadow-sm">
+            <div class="card-icon" aria-hidden="true">🔗</div>
+            <h3>Smart peer connections</h3>
+            <p>Connect with peers who share your interests and goals.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>

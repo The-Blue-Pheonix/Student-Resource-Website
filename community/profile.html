@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSync – Create Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body data-page="profile">
+    <header class="nav">
+      <a class="brand" href="index.html">EduSync</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html" class="active">Create Profile</a>
+        <a href="matches.html">Matches</a>
+        <a href="chat.html">Chat</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <main class="container">
+      <section class="card rounded-20 shadow-md gradient-2 profile-card">
+        <h1>Create your profile</h1>
+        <p class="muted">Tell us what you know and what you want to learn.</p>
+
+        <form id="profileForm" class="profile-form">
+          <div class="profile-row">
+            <div class="avatar-wrap">
+              <div class="avatar" id="avatarPreview">ES</div>
+              <label class="btn btn-secondary" for="avatarInput">Upload Avatar</label>
+              <input id="avatarInput" type="file" accept="image/*" hidden />
+            </div>
+
+            <div class="fields">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" class="input" type="text" placeholder="Jane Doe" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" class="input" type="email" placeholder="jane@university.edu" readonly />
+              </div>
+              <div class="field">
+                <label for="level">Level</label>
+                <select id="level" class="select">
+                  <option>Beginner</option>
+                  <option>Intermediate</option>
+                  <option>Mentor</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="chips-wrap">
+            <div class="chips-section">
+              <h3>Skills You Know</h3>
+              <div id="chipsKnow" class="chips"></div>
+            </div>
+            <div class="chips-section">
+              <h3>Skills You Want To Learn</h3>
+              <div id="chipsLearn" class="chips"></div>
+            </div>
+          </div>
+
+          <div class="add-custom">
+            <input id="customSkill" class="input" type="text" placeholder="Add custom skill" />
+            <button type="button" class="btn btn-secondary" id="addSkillBtn">Add Skill</button>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Save &amp; Get Matches</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EduSync – AI-Powered Peer Learning & Mentorship</p>
+    </footer>
+  </body>
+</html>
