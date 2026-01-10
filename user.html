@@ -92,22 +92,19 @@
   </div>
 
   <!-- Supabase + App logic -->
-  <script type="module">
-    // ---------- CONFIG: Replace these ----------
-    const SUPABASE_URL = "https://ringzvnghdbkksfzgjmi.supabase.co"; // <-- replace
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbmd6dm5naGRia2tzZnpnam1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3ODk5MTgsImV4cCI6MjA3ODM2NTkxOH0.ExdjZ8XJqKMrXOp2qr3QMctFwHvzvolGqzBM3enUZXY"; // <-- replace
+  <!-- Supabase + App logic -->
+  <!-- Import Supabase CDN first -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Import Centralized Config -->
+  <script src="js/supabase-config.js"></script>
+
+  <script>
     const ADMIN_EMAILS = [
       "chirabrataghosal9@gmail.com",
       "admin2@college.edu",
       "admin3@college.edu",
       "admin4@college.edu"
-    ]; // <-- put your admin emails here
-    // -------------------------------------------
-
-    // Import supabase client (ESM from jsdelivr)
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    ];
 
     // Lottie intro
     var animation = lottie.loadAnimation({
@@ -125,7 +122,7 @@
       gsap.to(auth, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
 
       // If already signed in, redirect to appropriate page
-      const { data: { session } } = await supabase.auth.getSession();
+      const session = await getSession();
       if (session?.user?.email) {
         redirectByRole(session.user.email);
       }
@@ -162,16 +159,14 @@
     function clearMessage(){ messageDiv.textContent = ""; }
 
     // Redirect helper based on email
-    // ...
     function redirectByRole(email){
-    if (ADMIN_EMAILS.includes(email)) {
-      window.location.href = "admin.html";
-    } else {
-      // Normal user
-      window.location.href = "index.html"; // <-- NOW IT GOES HOME
+        if (ADMIN_EMAILS.includes(email)) {
+             window.location.href = "admin.html";
+        } else {
+             // Normal user goes to DASHBOARD, not home
+             window.location.href = "userDashboard.html"; 
+        }
     }
-  }
-// ...
 
     // Register - create new user
     async function handleRegister(evt) {
@@ -189,7 +184,7 @@
 
       showMessage("Creating account...");
 
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error } = await supabaseClient.auth.signUp({
         email,
         password,
         options: { data: { username } } // store username in user_metadata
@@ -200,9 +195,8 @@
         return;
       }
 
-      // On many Supabase setups, email confirmation may be required. Inform the user:
-      showMessage("Account created. Check your email to confirm (if required). You can now login after confirmation.");
-      // Optionally auto-switch to login tab:
+      showMessage("Account created. Check your email to confirm (if required). You can now login.");
+      // Auto-switch to login tab:
       loginTab.click();
     }
 
@@ -215,7 +209,7 @@
 
       showMessage("Signing in...");
 
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
       if (error) {
         showMessage("Login failed: " + error.message, true);
@@ -227,16 +221,11 @@
       redirectByRole(email);
     }
 
-    // Listen to auth changes (optional): if sign out or sign in from another tab
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        // signed out — show message or return to login
-        // we won't force redirect here so user stays on login/register
-        return;
+    // Listen to auth changes
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+           redirectByRole(session.user.email);
       }
-      // if signed in, redirect
-      const email = session.user.email;
-      redirectByRole(email);
     });
 
     // Expose handlers globally for onsubmit attributes
