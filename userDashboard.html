@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>User Dashboard</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    #logoutButton { margin-top: 1rem; padding: 0.5rem 1rem; background: #e74c3c; 
-                    color: white; border: none; cursor: pointer; }
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    #logoutButton {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Welcome, User!</h1>
   <p>You are logged in.</p>
-  
+
   <button id="logoutButton">Logout</button>
+
+  <div style="margin: 20px 0;">
+    <a href="community/index.html"
+      style="display: inline-block; padding: 10px 20px; background: #00aaff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+      Enter Community
+    </a>
+  </div>
+
+  <!-- Supabase + Unified Config -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
 
   <script type="module">
     // --- Use the same config keys from your login page ---
-    const SUPABASE_URL = "https://ringzvnghdbkksfzgjmi.supabase.co"; 
+    const SUPABASE_URL = "https://ringzvnghdbkksfzgjmi.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbmd6dm5naGRia2tzZnpnam1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3ODk5MTgsImV4cCI6MjA3ODM2NTkxOH0.ExdjZ8XJqKMrXOp2qr3QMctFwHvzvolGqzBM3enUZXY";
 
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
@@ -27,7 +50,7 @@
     // --- Check if user is logged in ---
     (async function checkSession() {
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       // ...
       if (!session) {
         // NO user is logged in. Kick them back to the login page.
@@ -47,4 +70,5 @@
   </script>
 
 </body>
+
 </html>
